@@ -15,6 +15,8 @@ import com.springreact.fullstackbackend.exception.UserNotFoundException;
 import com.springreact.fullstackbackend.model.User;
 import com.springreact.fullstackbackend.repository.UserRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin("http://localhost:3000")
 public class UserController {
@@ -23,7 +25,7 @@ public class UserController {
 	private UserRepository userRepository;
 	
 	@PostMapping("/user")
-	User newUser(@RequestBody User newUser) {
+	User newUser(@Valid @RequestBody User newUser) {
 		return userRepository.save(newUser);
 				
 	}
@@ -41,7 +43,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/users/{id}")
-	User updateUser(@RequestBody User newUser, @PathVariable Long id) {
+	User updateUser(@Valid @RequestBody User newUser, @PathVariable Long id) {
 		return userRepository.findById(id)
 				.map(user -> {
 					user.setName(newUser.getName());
