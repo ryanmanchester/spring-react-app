@@ -1,1 +1,2 @@
 web: java -jar target/fullstack-backend-0.0.1-SNAPSHOT.jar
+web: gunicorn application:server --preload --bind 0.0.0.0:$PORT --timeout 150
